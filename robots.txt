@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://blogglow.com/sitemap.xml
+Sitemap: https://stockquill.com/sitemap.xml
