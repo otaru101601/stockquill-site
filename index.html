@@ -362,10 +362,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
     <div>
         <div class="result-bar">
             <span class="result-count" id="result-count"></span>
-            <select class="sort-select" id="sort-select">
-                <option value="latest">최신순</option>
-                <option value="oldest">오래된순</option>
-            </select>
         </div>
         <div class="post-grid" id="post-grid"></div>
         <div class="load-more-wrap" id="load-more-wrap" style="display:none;">
@@ -450,7 +446,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
     let currentPage = 1;
     let filteredPosts = [];
     let activeTag = '전체';
-    let sortOrder = 'latest';
 
     const postGrid = document.getElementById('post-grid');
     const loadMoreWrap = document.getElementById('load-more-wrap');
@@ -473,7 +468,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
                 (p.tags || []).some(t => t.toLowerCase().includes(keyword));
             return matchTag && matchSearch;
         });
-        if (sortOrder === 'oldest') result = [...result].reverse();
         return result;
     }
 
@@ -559,11 +553,6 @@ img{display:block;width:100%;height:100%;object-fit:cover}
         });
     });
 
-    // 정렬 이벤트
-    document.getElementById('sort-select').addEventListener('change', e => {
-        sortOrder = e.target.value;
-        render(true);
-    });
 
     // ✅ 개선된 검색 로직
     (function() {
