@@ -35,7 +35,7 @@
      {
         "@context": "https://schema.org",
         "@type": "BreadcrumbList",
-        "itemListElement": [{
+        "itemListElement":[{
             "@type": "ListItem",
             "position": 1,
             "name": "홈",
@@ -68,6 +68,26 @@ a{text-decoration:none;color:inherit}
 .ad-label { font-size: 10px; font-weight: 800; color: #94a3b8; letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 20px; border-bottom: 1px dashed #e2e8f0; background: #ffffff; display: flex; align-items: center; gap: 6px; }
 .ad-label::before { content:''; display:inline-block; width:6px; height:6px; background:#e2e8f0; border-radius:50%; }
 .ad-area { width: 100%; min-height: 250px; display: flex; align-items: center; justify-content: center; color: var(--text-light); font-size: 13px; }
+
+/* 🚀 [신규] 상단 Hero Section 디자인 */
+.hero-post { display: flex; background: #ffffff; border-radius: 24px; overflow: hidden; box-shadow: 0 10px 40px rgba(0,0,0,0.04); margin-bottom: 40px; border: 1px solid #f1f5f9; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.hero-post:hover { transform: translateY(-5px); box-shadow: 0 20px 50px rgba(0,0,0,0.08); border-color: #e2e8f0; }
+.hero-thumb { width: 60%; position: relative; }
+.hero-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { position: absolute; inset: 0; background: linear-gradient(to right, transparent 50%, #ffffff 100%); }
+.hero-info { width: 40%; padding: 50px 40px; display: flex; flex-direction: column; justify-content: center; background: #ffffff; }
+.hero-meta-top { display: flex; gap: 10px; margin-bottom: 20px; align-items: center; }
+.hero-badge { background: #ef4444; color: white; padding: 4px 10px; border-radius: 6px; font-weight: 800; font-size: 11px; letter-spacing: 0.1em; }
+.hero-cat { color: var(--primary); font-weight: 800; font-size: 13px; letter-spacing: 0.05em; }
+.hero-title { font-size: 32px; font-weight: 800; color: #0f172a; line-height: 1.35; margin-bottom: 16px; word-break: keep-all; letter-spacing: -0.02em; font-family: 'Pretendard', sans-serif;}
+.hero-title span { font-size: 16px; color: #64748b; display: block; margin-bottom: 8px; font-weight: 600; letter-spacing: -0.01em; }
+.hero-title span b { color: #3b82f6; font-weight: 800; margin-right: 8px; }
+.hero-excerpt { font-size: 15px; color: #64748b; line-height: 1.6; margin-bottom: 30px; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.hero-meta-bottom { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #f1f5f9; padding-top: 20px; }
+.hero-author { display: flex; align-items: center; gap: 10px; }
+.hero-author img { width: 36px; height: 36px; border-radius: 50%; border: 1px solid #e2e8f0; }
+.hero-author .name { font-size: 13px; font-weight: 800; color: #1e293b; }
+.hero-author .date { font-size: 12px; color: #94a3b8; }
 
 /* 🚀 포스트 카드 플로팅 디자인 */
 .result-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; }
@@ -114,7 +134,15 @@ a{text-decoration:none;color:inherit}
 
 /* 모바일 반응형 */
 @media (max-width:1200px){ .main-layout{grid-template-columns:1fr var(--sidebar-w)} .sidebar:first-child{display:none} }
-@media (max-width:900px){ .main-layout{grid-template-columns:1fr} .sidebar{display:none} }
+@media (max-width:900px){
+    .main-layout{grid-template-columns:1fr}
+    .sidebar{display:none}
+    .hero-post { flex-direction: column; }
+    .hero-thumb { width: 100%; aspect-ratio: 16/9; }
+    .hero-overlay { background: linear-gradient(to bottom, transparent 50%, #ffffff 100%); }
+    .hero-info { width: 100%; padding: 30px 24px; }
+    .hero-title { font-size: 26px; }
+}
 @media (max-width:768px){
     .post-card { flex-direction: column; border-radius: 20px; overflow: hidden; padding: 0; }
     .card-thumb {
@@ -199,7 +227,7 @@ a{text-decoration:none;color:inherit}
         padding: 12px 24px;
         border-bottom: 1px solid #e5e5e5;
     }.search-box.active{display:block !important}.search-icon-pos{left:40px}.m-btn{display:flex !important}.footer-inner{grid-template-columns:1fr 1fr;gap:24px}.footer-brand{grid-column:1 / -1}}
-</style>
+    </style>
 </head>
 <body>
 
@@ -254,8 +282,6 @@ a{text-decoration:none;color:inherit}
     <nav class="m-nav-list"><a href="https://stockquill.com/index.html#시장분석">시장분석</a><a href="https://stockquill.com/index.html#국내주식">국내주식</a><a href="https://stockquill.com/index.html#미국주식">미국주식</a><a href="https://stockquill.com/index.html#ETF">배당/ETF</a></nav>
 </div>
 
-
-
 <!-- 필터 바 -->
 <div class="filter-bar">
     <div class="filter-inner">
@@ -273,7 +299,7 @@ a{text-decoration:none;color:inherit}
     </div>
 </div>
 
-<!-- 메인 레이아웃 (우측 위젯 제거됨) -->
+<!-- 메인 레이아웃 -->
 <div class="main-layout">
 
     <!-- 좌측 광고 -->
@@ -284,8 +310,11 @@ a{text-decoration:none;color:inherit}
         </div>
     </aside>
 
-    <!-- 중앙: 포스트 그리드 -->
+    <!-- 중앙: 포스트 영역 -->
     <div>
+        <!-- 🚀 [신규] Hero 포스트가 렌더링될 컨테이너 -->
+        <div id="hero-post-container"></div>
+
         <div class="result-bar">
             <span class="result-count" id="result-count"></span>
         </div>
@@ -298,9 +327,9 @@ a{text-decoration:none;color:inherit}
         </div>
     </div>
 
-    <!-- 우측 광고 (위젯 삭제하고 광고만 배치) -->
+    <!-- 우측 광고 -->
     <aside class="sidebar">
-    
+        
     <div class="widget" style="background: linear-gradient(145deg, #1e293b, #0f172a); border: none; position: relative; overflow: hidden; border-radius: 20px;">
         <!-- 배경 글래스모피즘 라이트 효과 -->
         <div style="position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: #3b82f6; border-radius: 50%; filter: blur(60px); opacity: 0.4; pointer-events: none;"></div>
@@ -349,9 +378,9 @@ a{text-decoration:none;color:inherit}
     </div>
     <div class="footer-bottom">© 2026 StockQuill. All rights reserved.</div>
 </footer>
+
 <script>
 (function() {
-    // 모바일 UI 토글
     const searchBtn = document.getElementById('m-search-toggle');
     const searchBox = document.getElementById('global-search-box');
     const menuBtn = document.getElementById('m-menu-toggle');
@@ -359,19 +388,13 @@ a{text-decoration:none;color:inherit}
     const overlay = document.getElementById('sidebar-overlay');
     const closeBtn = document.getElementById('m-sidebar-close');
 
-    if(searchBtn) {
-        searchBtn.onclick = (e) => { e.stopPropagation(); searchBox.classList.toggle('active'); };
-    }
-    if(menuBtn) {
-        menuBtn.onclick = () => { sidebar.classList.add('active'); overlay.classList.add('active'); };
-    }
+    if(searchBtn) searchBtn.onclick = (e) => { e.stopPropagation(); searchBox.classList.toggle('active'); };
+    if(menuBtn) menuBtn.onclick = () => { sidebar.classList.add('active'); overlay.classList.add('active'); };
     const closeMenu = () => { sidebar.classList.remove('active'); overlay.classList.remove('active'); };
     if(closeBtn) closeBtn.onclick = closeMenu;
     if(overlay) overlay.onclick = closeMenu;
 })();
 </script>
-
-
 
 <script type="application/json" id="db-store">[]</script>
 
@@ -380,31 +403,35 @@ a{text-decoration:none;color:inherit}
     const posts = [{"id":1772782747496,"groupId":1772782747495,"title":"테슬라(TSLA) 2026년 주가 전망 및 로보택시 밸류에이션 심층 분석 (지금 사야 할까, 기다려야 할까?)","filename":"post/테슬라TSLA-2026년-주가-전망-및-로보택시-밸류에이션-심층-분석.html","excerpt":"뱅크오브아메리카 목표주가 460달러 재개와 로보택시 확장, 옵티머스 Gen3 공개 임박까지. 테슬라의 2026년 투자 논리와 리스크를 데이터로 냉정하게 분석합니다.","date":"2026. 3. 6.","category":"미국주식","tags":["미국주식","나스닥","기술주"],"keywords":"미국주식, 나스닥, 기술주","thumbnail":"https://stockquill.com/images/thumb-1772782747496.webp"},{"id":1772782671684,"groupId":1772782671684,"title":"비트마인(BMNR) 이더리움 트레저리 전략 심층 분석 (세계 최대 ETH 보유 기업의 진짜 가치는?)","filename":"post/비트마인BMNR-이더리움-트레저리-전략-심층-분석.html","excerpt":"비트마인 이머전 테크놀로지스(BMNR)는 비트코인 채굴사에서 세계 최대 이더리움 트레저리 기업으로 탈바꿈했습니다. 447만 ETH 보유, MAVAN 스테이킹, NAV 할인 매력까지 데이터로 철저히 분석합니다.","date":"2026. 3. 6.","category":"미국주식","tags":["미국주식","나스닥","기술주"],"keywords":"미국주식, 나스닥, 기술주","thumbnail":"https://stockquill.com/images/thumb-1772782671684.webp"}];
     const PER_PAGE = 12;
     let currentPage = 1;
-    let filteredPosts = [];
+    let filteredPosts =[];
     let activeTag = '전체';
 
+    const heroContainer = document.getElementById('hero-post-container');
     const postGrid = document.getElementById('post-grid');
     const loadMoreWrap = document.getElementById('load-more-wrap');
     const resultCount = document.getElementById('result-count');
     const headerSearch = document.querySelector('.search-input');
 
-    // 통계
-    const allCats = [...new Set(posts.map(p => p.category).filter(Boolean))];
-    document.querySelectorAll('.stat-posts').forEach(el => el.textContent = posts.length);
-    document.querySelectorAll('.stat-cats').forEach(el => el.textContent = allCats.length);
+    // 타이틀 분리 파서 (티커, 부제목, 메인제목)
+    function parseTitle(rawTitle) {
+        let ticker = "";
+        let subTitle = "";
+        let mainTitle = (rawTitle || "").trim();
 
-    // 필터
-    function getFiltered() {
-        const keyword = (headerSearch ? headerSearch.value : '').toLowerCase().trim();
-        let result = posts.filter(p => {
-            const matchTag = activeTag === '전체' || (p.tags || []).includes(activeTag);
-            const matchSearch = !keyword ||
-                p.title.toLowerCase().includes(keyword) ||
-                (p.excerpt || '').toLowerCase().includes(keyword) ||
-                (p.tags || []).some(t => t.toLowerCase().includes(keyword));
-            return matchTag && matchSearch;
-        });
-        return result;
+        const subMatch = mainTitle.match(/\(([^)]+)\)$/);
+        if (subMatch) {
+            const inside = subMatch[1].trim();
+            if (inside.includes(' ') || inside.length > 6) {
+                subTitle = inside;
+                mainTitle = mainTitle.slice(0, subMatch.index).trim();
+            }
+        }
+        const tickerMatch = mainTitle.match(/\(([A-Za-z0-9]+)\)/);
+        if (tickerMatch) {
+            ticker = tickerMatch[1].toUpperCase();
+            mainTitle = mainTitle.replace(tickerMatch[0], '').trim();
+        }
+        return { mainTitle, subTitle, ticker };
     }
 
     const TimeAgo = {
@@ -422,21 +449,66 @@ a{text-decoration:none;color:inherit}
         }
     };
 
-    // 카드 생성
+    function getFiltered() {
+        const keyword = (headerSearch ? headerSearch.value : '').toLowerCase().trim();
+        return posts.filter(p => {
+            const matchTag = activeTag === '전체' || (p.tags ||[]).includes(activeTag);
+            const matchSearch = !keyword ||
+                p.title.toLowerCase().includes(keyword) ||
+                (p.excerpt || '').toLowerCase().includes(keyword) ||
+                (p.tags ||[]).some(t => t.toLowerCase().includes(keyword));
+            return matchTag && matchSearch;
+        });
+    }
+
+    // 🚀 1. Hero 카드 렌더링 함수 (에러 수정: 문자열 덧셈 방식으로 이스케이프 회피)
+    function renderHeroCard(post) {
+        const relativeDate = TimeAgo.format(post.date);
+        const parsed = parseTitle(post.title);
+
+        let topTagHtml = '';
+        if (parsed.ticker) topTagHtml += '<b>' + parsed.ticker + '</b>';
+        if (parsed.subTitle) topTagHtml += parsed.subTitle;
+
+        const formattedTitle = topTagHtml ? '<span>' + topTagHtml + '</span>' + parsed.mainTitle : parsed.mainTitle;
+
+        return `
+        <div class="hero-post" onclick="location.href='${post.filename}'">
+            <div class="hero-thumb">
+                <img src="${post.thumbnail || ''}" alt="${post.title}" fetchpriority="high">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-info">
+                <div class="hero-meta-top">
+                    <span class="hero-badge">EDITOR'S PICK</span>
+                    <span class="hero-cat">${post.category || '분석'}</span>
+                </div>
+                <h2 class="hero-title">${formattedTitle}</h2>
+                <p class="hero-excerpt">${post.excerpt || ''}</p>
+                <div class="hero-meta-bottom">
+                    <div class="hero-author">
+                        <img src="https://stockquill.com/images/favicon.png" alt="StockQuill">
+                        <div>
+                            <div class="name">StockQuill</div>
+                            <div class="date">${relativeDate}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        `;
+    }
+
+    // 🚀 2. 일반 그리드 카드 렌더링 함수 (에러 수정: 문자열 덧셈 방식 적용)
     function renderCard(post) {
         const relativeDate = TimeAgo.format(post.date);
-        const tags = (post.tags || []).slice(0, 3).map(t =>
-            `<span class="tag-pill">#${t}</span>`
-        ).join('');
+        const tags = (post.tags ||[]).slice(0, 3).map(t => '<span class="tag-pill">#' + t + '</span>').join('');
 
-        let formattedTitle = post.title;
-        const pStart = post.title.lastIndexOf('(');
-        const pEnd   = post.title.lastIndexOf(')');
-        if (pStart > 0 && pEnd > pStart) {
-            const sub  = post.title.slice(pStart + 1, pEnd).trim();
-            const main = post.title.slice(0, pStart).trim();
-            formattedTitle = '<span>' + sub + '</span>' + main;
-        }
+        const parsed = parseTitle(post.title);
+        let topTagHtml = '';
+        if (parsed.ticker) topTagHtml += '<b>' + parsed.ticker + '</b>';
+        if (parsed.subTitle) topTagHtml += parsed.subTitle;
+        const formattedTitle = topTagHtml ? '<span>' + topTagHtml + '</span>' + parsed.mainTitle : parsed.mainTitle;
 
         return `
             <div class="post-card" onclick="location.href='${post.filename}'">
@@ -455,24 +527,36 @@ a{text-decoration:none;color:inherit}
         `;
     }
 
-    // 렌더링
+    // 🚀 3. 메인 렌더링 로직 (Hero + Grid 분리)
     function render(reset = false) {
         filteredPosts = getFiltered();
-        if (reset) { currentPage = 1; postGrid.innerHTML = ''; }
+        if (reset) {
+            currentPage = 1;
+            postGrid.innerHTML = '';
+            if(heroContainer) heroContainer.innerHTML = '';
+        }
 
         if (filteredPosts.length === 0) {
-            postGrid.innerHTML = `<div class="empty-state"><div class="empty-icon">🔍</div><p>검색 결과가 없습니다.</p></div>`;
+            postGrid.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><p>검색 결과가 없습니다.</p></div>';
             loadMoreWrap.style.display = 'none';
             resultCount.innerHTML = '';
             return;
         }
 
-        const start = reset ? 0 : (currentPage - 1) * PER_PAGE;
-        const chunk = filteredPosts.slice(start, start + PER_PAGE);
-        postGrid.innerHTML += chunk.map(p => renderCard(p)).join('');
+        let itemsToRender =[];
 
-        const shown = Math.min(currentPage * PER_PAGE, filteredPosts.length);
-        resultCount.innerHTML = `<strong>${filteredPosts.length}</strong>개 아티클`;
+        if (currentPage === 1) {
+            if(heroContainer) heroContainer.innerHTML = renderHeroCard(filteredPosts[0]);
+            itemsToRender = filteredPosts.slice(1, PER_PAGE + 1);
+        } else {
+            const start = (currentPage - 1) * PER_PAGE + 1;
+            itemsToRender = filteredPosts.slice(start, start + PER_PAGE);
+        }
+
+        postGrid.innerHTML += itemsToRender.map(p => renderCard(p)).join('');
+
+        const shown = (currentPage === 1) ? itemsToRender.length + 1 : ((currentPage - 1) * PER_PAGE + 1) + itemsToRender.length;
+        resultCount.innerHTML = '<strong>' + filteredPosts.length + '</strong>개 아티클';
         loadMoreWrap.style.display = shown < filteredPosts.length ? 'block' : 'none';
     }
 
@@ -489,10 +573,8 @@ a{text-decoration:none;color:inherit}
         });
     });
 
-
-    // ✅ 개선된 검색 로직
+    // 검색 로직
     (function() {
-        // URL에서 검색어 추출 및 자동 검색
         const urlParams = new URLSearchParams(window.location.search);
         const searchQuery = urlParams.get('q');
 
@@ -503,7 +585,6 @@ a{text-decoration:none;color:inherit}
         }
 
         if (headerSearch) {
-            // Enter 키로 검색
             headerSearch.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter') {
                     e.preventDefault();
@@ -517,7 +598,6 @@ a{text-decoration:none;color:inherit}
                 }
             });
 
-            // 실시간 검색 (300ms debounce)
             let debounceTimer;
             headerSearch.addEventListener('input', () => {
                 clearTimeout(debounceTimer);
@@ -542,33 +622,12 @@ a{text-decoration:none;color:inherit}
 })();
 </script>
 
-
-<!-- Swiper.js 스크립트 로드 및 초기화 -->
+<!-- Swiper & AOS -->
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 <script>
-  var swiper = new Swiper(".mySwiper", {
-    effect: "fade",
-    fadeEffect: { crossFade: true },
-    loop: true,
-    autoHeight: true,
-    autoplay: {
-      delay: 5000,
-      disableOnInteraction: false,
-    },
-    pagination: {
-      el: ".swiper-pagination",
-      clickable: true,
-    },
-  });
+  var swiper = new Swiper(".mySwiper", { effect: "fade", fadeEffect: { crossFade: true }, loop: true, autoHeight: true, autoplay: { delay: 5000, disableOnInteraction: false }, pagination: { el: ".swiper-pagination", clickable: true } });
 </script>
-
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 1000,
-    once: true,
-    offset: 50
-  });
-</script>
+<script> AOS.init({ duration: 1000, once: true, offset: 50 }); </script>
 </body>
 </html>
